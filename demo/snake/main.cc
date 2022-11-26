@@ -1,6 +1,7 @@
-#include "ccgame.h"
 #include <iostream>
 #include <random>
+
+#include "ccgame.h"
 
 using namespace ccgame;
 
@@ -10,10 +11,12 @@ constexpr int WINDOW_HEIGHT = 480;
 enum PAGE { PAGE_MENU, PAGE_GAME, PAGE_PAUSE, PAGE_END };
 
 class Snake : public PaintView {
-public:
+ public:
   Snake(int x, int y, int map_size, int unit_size, int game_tick_)
       : PaintView(x, y, map_size * unit_size, map_size * unit_size),
-        unit_(unit_size), map_size_(map_size), game_tick_(game_tick_) {
+        unit_(unit_size),
+        map_size_(map_size),
+        game_tick_(game_tick_) {
     static std::random_device rd;
     random_engine_ = std::default_random_engine(rd());
     distribution = std::uniform_int_distribution<int>(0, map_size_ - 1);
@@ -33,22 +36,18 @@ public:
 
   void OnKeyDown(Context &context, SDL_Keycode keycode) override {
     switch (keycode) {
-    case SDLK_w:
-      if (direction_ != SOUTH)
-        next_direction_ = NORTH;
-      break;
-    case SDLK_a:
-      if (direction_ != EAST)
-        next_direction_ = WEST;
-      break;
-    case SDLK_d:
-      if (direction_ != WEST)
-        next_direction_ = EAST;
-      break;
-    case SDLK_s:
-      if (direction_ != NORTH)
-        next_direction_ = SOUTH;
-      break;
+      case SDLK_w:
+        if (direction_ != SOUTH) next_direction_ = NORTH;
+        break;
+      case SDLK_a:
+        if (direction_ != EAST) next_direction_ = WEST;
+        break;
+      case SDLK_d:
+        if (direction_ != WEST) next_direction_ = EAST;
+        break;
+      case SDLK_s:
+        if (direction_ != NORTH) next_direction_ = SOUTH;
+        break;
     }
   }
 
@@ -87,7 +86,7 @@ public:
   bool IsEnd() { return end_; }
   int GetScore() { return snake_.size() - 1; }
 
-private:
+ private:
   struct Coord {
     int x;
     int y;
@@ -127,18 +126,18 @@ private:
     Coord headnext{snake_[0].x, snake_[0].y};
     direction_ = next_direction_;
     switch (direction_) {
-    case NORTH:
-      headnext.y--;
-      break;
-    case SOUTH:
-      headnext.y++;
-      break;
-    case WEST:
-      headnext.x--;
-      break;
-    case EAST:
-      headnext.x++;
-      break;
+      case NORTH:
+        headnext.y--;
+        break;
+      case SOUTH:
+        headnext.y++;
+        break;
+      case WEST:
+        headnext.x--;
+        break;
+      case EAST:
+        headnext.x++;
+        break;
     }
 
     if (headnext.x < 0 || headnext.y < 0 || headnext.x >= map_size_ ||
@@ -151,7 +150,7 @@ private:
     if (headnext == fruit_) {
       do {
         fruit_ = RandomCoord();
-      } while (InSnake(fruit_) && !(fruit_ == headnext));
+      } while (InSnake(fruit_) || fruit_ == headnext);
       snake_.push_back({});
     }
 
