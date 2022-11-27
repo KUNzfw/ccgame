@@ -1,3 +1,5 @@
+#include <SDL_filesystem.h>
+
 #include <iostream>
 #include <random>
 
@@ -181,7 +183,7 @@ int main(int argc, char **argv) {
 
     Window window("Snake", WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    Font joystix28("assets/joystix.ttf", 28);
+    Font joystix28(std::string(SDL_GetBasePath()) + "assets/joystix.ttf", 28);
 
     Snake game(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 16, WINDOW_HEIGHT / 20,
                100);
@@ -233,7 +235,7 @@ int main(int argc, char **argv) {
       }
     });
 
-    Font joystix14("assets/joystix.ttf", 14);
+    Font joystix14(std::string(SDL_GetBasePath()) + "assets/joystix.ttf", 14);
     TextView button3("PAUSE", &joystix14, 10, 10);
 
     button3.SetOnMouseButtonDownListener(
@@ -294,7 +296,7 @@ int main(int argc, char **argv) {
     rect2.SetBlendMode(SDL_BLENDMODE_BLEND);
     rect2.SetAlpha(0xCC);
 
-    Font joystix20("assets/joystix.ttf", 20);
+    Font joystix20(std::string(SDL_GetBasePath()) + "assets/joystix.ttf", 20);
     TextView text3("YOU DIED!PRESS ANY KEY TO RESTART!", &joystix20,
                    WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
     text3.SetAlign(CCGAME_ALIGN_CENTER);
