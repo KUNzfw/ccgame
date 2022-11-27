@@ -4,6 +4,8 @@ project(ccgame)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+option(CCGAME_WITH_EXAMPLE "Compile ccgame example" OFF)
+
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
@@ -27,7 +29,10 @@ target_link_libraries(ccgame
 	$<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
 	$<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
     $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
-	$<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
+    $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
 )
 
-add_subdirectory(demo/snake)
+#install the example
+if(CCGAME_WITH_EXAMPLE)
+    add_subdirectory(example/snake)
+endif()

@@ -74,4 +74,10 @@ int main(int argc, char **argv) {
 }
 ```
 
-> More demos are put in the demo folder. You can build it by cmake.
+More demos are put in the demo folder. You can build it by 
+```bash
+mkdir build
+cd build
+cmake -DCCGAME_WITH_EXAMPLE=ON ..
+cmake --build .
+```
