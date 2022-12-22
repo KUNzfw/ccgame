@@ -53,10 +53,17 @@ void PaintView::SetBackgroundColor(const SDL_Color& color) {
 const SDL_Color& PaintView::GetBackgroundColor() const { return bgcolor_; }
 
 void PaintView::Clear() { draw_cmds_.push_back(std::vector<int>{GEO_CLEAR}); }
+
 void PaintView::DrawRect(const SDL_Rect& rect, bool solid,
                          const SDL_Color& color) {
   draw_cmds_.push_back(std::vector<int>{GEO_RECT, rect.x, rect.y, rect.w,
                                         rect.h, color.r, color.g, color.b,
                                         color.a, solid});
+}
+
+void PaintView::DrawRect(int x, int y, int w, int h, bool solid,
+                         const SDL_Color& color) {
+  SDL_Rect rect{x, y, w, h};
+  DrawRect(rect, solid, color);
 }
 }  // namespace ccgame

@@ -16,6 +16,7 @@ class PaintView : public TextureView {
 
   void Clear();
   void DrawRect(const SDL_Rect& rect, bool solid, const SDL_Color& color);
+  void DrawRect(int x, int y, int w, int h, bool solid, const SDL_Color& color);
 
  private:
   SDL_Color bgcolor_{0xFF, 0xFF, 0xFF, 0xFF};

@@ -2,6 +2,7 @@
 #define CCGAME_WINDOW_h_
 #include <SDL2/SDL.h>
 
+#include <initializer_list>
 #include <map>
 #include <string>
 #include <vector>
@@ -26,7 +27,9 @@ class Window {
   void Start();
 
   void ShowGroup(int groupid);
+  void ShowGroup(std::initializer_list<int> groups);
   void HideGroup(int groupid);
+  void HideGroup(std::initializer_list<int> groups);
   void HideAllGroup();
 
   void Quit();

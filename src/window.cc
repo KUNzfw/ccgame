@@ -93,8 +93,19 @@ void Window::Start() {
 void Window::ShowGroup(int groupid) {
   gruops_to_hide_or_show_.push_back(std::make_pair(groupid, true));
 }
+void Window::ShowGroup(std::initializer_list<int> groups) {
+  for (auto i : groups) {
+    ShowGroup(i);
+  }
+}
+
 void Window::HideGroup(int groupid) {
   gruops_to_hide_or_show_.push_back(std::make_pair(groupid, false));
+}
+void Window::HideGroup(std::initializer_list<int> groups) {
+  for (auto i : groups) {
+    HideGroup(i);
+  }
 }
 void Window::HideAllGroup() {
   for (auto group : groups_) {
