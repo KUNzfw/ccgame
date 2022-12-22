@@ -1,5 +1,7 @@
 #include "context.h"
 
+#include <SDL_render.h>
+
 #include <stdexcept>
 namespace ccgame {
 Context::Context(SDL_Window *window, SDL_Renderer *renderer)
@@ -64,6 +66,18 @@ void Context::RenderFillRect(const SDL_Rect *rect) {
 
 void Context::RenderDrawRect(const SDL_Rect *rect) {
   if (SDL_RenderDrawRect(renderer_, rect) != 0) {
+    throw std::runtime_error(SDL_GetError());
+  }
+}
+
+void Context::RenderDrawPoint(int x, int y) {
+  if (SDL_RenderDrawPoint(renderer_, x, y) != 0) {
+    throw std::runtime_error(SDL_GetError());
+  }
+}
+
+void Context::RenderDrawLine(int x1, int y1, int x2, int y2) {
+  if (SDL_RenderDrawLine(renderer_, x1, y1, x2, y2) != 0) {
     throw std::runtime_error(SDL_GetError());
   }
 }

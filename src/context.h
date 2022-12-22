@@ -21,6 +21,8 @@ class Context {
 
   void RenderFillRect(const SDL_Rect *rect);
   void RenderDrawRect(const SDL_Rect *rect);
+  void RenderDrawPoint(int x, int y);
+  void RenderDrawLine(int x1, int y1, int x2, int y2);
 
   void RenderClear();
   void RenderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,

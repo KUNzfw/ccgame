@@ -35,4 +35,5 @@ target_link_libraries(ccgame
 #install the example
 if(CCGAME_WITH_EXAMPLE)
     add_subdirectory(example/snake)
+    add_subdirectory(example/circle)
 endif()

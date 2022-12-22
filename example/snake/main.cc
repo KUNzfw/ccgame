@@ -168,8 +168,12 @@ class Snake : public PaintView {
       DrawRect(SDL_Rect{c.x * unit_, c.y * unit_, unit_, unit_}, true,
                body_color_);
     }
-    DrawRect(SDL_Rect{fruit_.x * unit_, fruit_.y * unit_, unit_, unit_}, true,
-             fruit_color_);
+    int fruit_radius = unit_ / 2;
+    FillAACircle(fruit_.x * unit_ + fruit_radius,
+                 fruit_.y * unit_ + fruit_radius, fruit_radius, fruit_color_);
+    // FillCircle(fruit_.x * unit_ + fruit_radius, fruit_.y * unit_ +
+    // fruit_radius,
+    //            fruit_radius, fruit_color_);
   }
 
   Coord RandomCoord() {
