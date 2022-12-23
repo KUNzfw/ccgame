@@ -54,7 +54,7 @@ bool View::IsInside(Sint32 x, Sint32 y) const {
 void View::Hide() { hidden_ = true; }
 void View::Show() { hidden_ = false; }
 
-bool View::isHidden() const { return hidden_; }
+bool View::IsHidden() const { return hidden_; }
 
 void View::UpdateRenderInfo() {
   switch (align_) {

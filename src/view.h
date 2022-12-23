@@ -42,7 +42,7 @@ class View {
 
   void Hide();
   void Show();
-  [[nodiscard]] bool isHidden() const;
+  [[nodiscard]] bool IsHidden() const;
 
   friend void Window::Start();
 
