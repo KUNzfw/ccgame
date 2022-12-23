@@ -7,6 +7,8 @@ class RectView : public PaintView {
   RectView() = delete;
   RectView(const SDL_Rect& rect, bool solid, const SDL_Color& color);
 
+  void OnShow(Context &context) override;
+
   void SetSolid(bool solid);
   void SetColor(const SDL_Color& color);
 

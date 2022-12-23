@@ -13,7 +13,7 @@ Window::Window(std::string title, int width, int height, int x, int y)
       y_(y),
       context_(nullptr, nullptr) {}
 
-void Window::RegisterView(View *view, int groupid) {
+void Window::RegisterView(View* view, int groupid) {
   if (view != nullptr) {
     views_.push_back(view);
   }
@@ -38,7 +38,7 @@ void Window::Start() {
             if (v->on_show_listener_ != nullptr) v->on_show_listener_(context_);
           }
         } else {
-          if (!v->hidden_) {
+          if (!v->isHidden()) {
             v->Hide();
             v->OnHide(context_);
             if (v->on_show_listener_ != nullptr) v->on_hide_listener_(context_);
@@ -101,7 +101,14 @@ void Window::Start() {
 }
 
 void Window::ShowGroup(int groupid) {
-  groups_to_hide_or_show_.emplace_back(groupid, true);
+  if (auto i = std::find_if(
+          groups_to_hide_or_show_.begin(), groups_to_hide_or_show_.end(),
+          [&](std::pair<int, bool> item) { return item.first == groupid; });
+      i != groups_to_hide_or_show_.end()) {
+    i->second = true;
+  } else {
+    groups_to_hide_or_show_.emplace_back(groupid, true);
+  }
 }
 void Window::ShowGroup(std::initializer_list<int> groups) {
   for (auto i : groups) {
@@ -110,7 +117,14 @@ void Window::ShowGroup(std::initializer_list<int> groups) {
 }
 
 void Window::HideGroup(int groupid) {
-  groups_to_hide_or_show_.emplace_back(groupid, false);
+  if (auto i = std::find_if(
+          groups_to_hide_or_show_.begin(), groups_to_hide_or_show_.end(),
+          [&](std::pair<int, bool> item) { return item.first == groupid; });
+      i != groups_to_hide_or_show_.end()) {
+    i->second = false;
+  } else {
+    groups_to_hide_or_show_.emplace_back(groupid, false);
+  }
 }
 void Window::HideGroup(std::initializer_list<int> groups) {
   for (auto i : groups) {

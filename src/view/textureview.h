@@ -9,6 +9,7 @@ class TextureView : public View {
   ~TextureView();
   void OnShow(Context &context) override;
   void OnRender(Context &context) override;
+  void OnHide(Context &context) override;
 
   void SetRotation(int center_x, int center_y, double angle);
   void SetFlip(SDL_RendererFlip flip_mode);

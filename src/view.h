@@ -10,23 +10,21 @@ namespace ccgame {
 enum CCGAME_ALIGN { CCGAME_ALIGN_TOPLEFT, CCGAME_ALIGN_CENTER };
 class View {
  public:
-  View();
-  ~View();
-
-  virtual void OnShow(Context &context);
-  virtual void OnRender(Context &context);
-  virtual void OnKeyDown(Context &context, SDL_Keycode keycode);
+  virtual void OnShow(Context &context){};
+  virtual void OnRender(Context &context){};
+  virtual void OnKeyDown(Context &context, SDL_Keycode keycode){};
   virtual void OnMouseButtonDown(Context &context, Sint32 x, Sint32 y,
-                                 Uint8 button);
-  virtual void OnMouseMotion(Context &context, Sint32 x, Sint32 y);
-  virtual void OnHide(Context &context);
+                                 Uint8 button){};
+  virtual void OnMouseMotion(Context &context, Sint32 x, Sint32 y){};
+  virtual void OnHide(Context &context){};
 
   void SetOnShowListener(std::function<void(Context &)> listener);
   void SetOnRenderListener(std::function<void(Context &)> listener);
   void SetOnKeydownListener(
       std::function<void(Context &, SDL_Keycode)> listener);
   void SetOnMouseButtonDownListener(
-      std::function<void(Context &context, Sint32 x, Sint32 y, Uint8 button)> listener);
+      std::function<void(Context &context, Sint32 x, Sint32 y, Uint8 button)>
+          listener);
   void SetOnMouseMotion(
       std::function<void(Context &, Sint32, Sint32)> listener);
   void SetOnHideListener(std::function<void(Context &)> listener);

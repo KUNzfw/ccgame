@@ -19,9 +19,17 @@ void TextureView::OnShow(Context &context) {
 }
 
 void TextureView::OnRender(Context &context) {
+  if (texture_ == nullptr) return;
   SDL_Rect rect{GetRenderX(), GetRenderY(), GetWidth(), GetHeight()};
   context.RenderCopyEx(texture_, &clip_, &rect, rotation_angle_,
                        &rotation_center_, flip_mode_);
+}
+
+void TextureView::OnHide(Context &context) {
+  if (texture_ != nullptr) {
+    SDL_DestroyTexture(texture_);
+    texture_ = nullptr;
+  }
 }
 
 void TextureView::SetRotation(int center_x, int center_y, double angle) {
@@ -30,7 +38,9 @@ void TextureView::SetRotation(int center_x, int center_y, double angle) {
   rotation_angle_ = angle;
 }
 
-void TextureView::SetFlip(SDL_RendererFlip flip_mode) { flip_mode_ = flip_mode; }
+void TextureView::SetFlip(SDL_RendererFlip flip_mode) {
+  flip_mode_ = flip_mode;
+}
 
 void TextureView::SetScale(double scale_width, double scale_height) {
   scale_width_ = scale_width;

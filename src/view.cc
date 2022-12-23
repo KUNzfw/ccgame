@@ -1,16 +1,5 @@
 #include "view.h"
 namespace ccgame {
-View::View() = default;
-View::~View() = default;
-
-void View::OnShow(Context &context) {}
-void View::OnRender(Context &context) {}
-void View::OnKeyDown(Context &context, SDL_Keycode keycode) {}
-void View::OnMouseButtonDown(Context &context, Sint32 x, Sint32 y,
-                             Uint8 button) {}
-void View::OnMouseMotion(Context &context, Sint32 x, Sint32 y) {}
-void View::OnHide(Context &context) {}
-
 void View::SetOnShowListener(std::function<void(Context &)> listener) {
   on_show_listener_ = std::move(listener);
 }
