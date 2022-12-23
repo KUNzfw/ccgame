@@ -18,16 +18,16 @@ class View {
   virtual void OnMouseMotion(Context &context, Sint32 x, Sint32 y){};
   virtual void OnHide(Context &context){};
 
-  void SetOnShowListener(std::function<void(Context &)> listener);
-  void SetOnRenderListener(std::function<void(Context &)> listener);
+  void SetOnShowListener(std::function<void(Context &context)> listener);
+  void SetOnRenderListener(std::function<void(Context &context)> listener);
   void SetOnKeydownListener(
-      std::function<void(Context &, SDL_Keycode)> listener);
+      std::function<void(Context &context, SDL_Keycode keycode)> listener);
   void SetOnMouseButtonDownListener(
       std::function<void(Context &context, Sint32 x, Sint32 y, Uint8 button)>
           listener);
   void SetOnMouseMotion(
-      std::function<void(Context &, Sint32, Sint32)> listener);
-  void SetOnHideListener(std::function<void(Context &)> listener);
+      std::function<void(Context &context, Sint32 x, Sint32 y)> listener);
+  void SetOnHideListener(std::function<void(Context &context)> listener);
 
   void SetPosition(int x, int y);
   void SetAlign(CCGAME_ALIGN align);
