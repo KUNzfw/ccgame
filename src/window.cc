@@ -1,10 +1,12 @@
 #include "window.h"
 
+#include <utility>
+
 #include "context.h"
 #include "view.h"
 namespace ccgame {
 Window::Window(std::string title, int width, int height, int x, int y)
-    : title_(title),
+    : title_(std::move(title)),
       width_(width),
       height_(height),
       x_(x),
@@ -27,7 +29,7 @@ void Window::Start() {
 
   SDL_Event e{};
   while (!quit_) {
-    for (auto g : gruops_to_hide_or_show_) {
+    for (auto g : groups_to_hide_or_show_) {
       for (auto v : groups_[g.first]) {
         if (g.second) {
           v->Show();
@@ -36,7 +38,7 @@ void Window::Start() {
         }
       }
     }
-    gruops_to_hide_or_show_.clear();
+    groups_to_hide_or_show_.clear();
 
     while (SDL_PollEvent(&e)) {
       switch (e.type) {
@@ -91,7 +93,7 @@ void Window::Start() {
 }
 
 void Window::ShowGroup(int groupid) {
-  gruops_to_hide_or_show_.push_back(std::make_pair(groupid, true));
+  groups_to_hide_or_show_.emplace_back(groupid, true);
 }
 void Window::ShowGroup(std::initializer_list<int> groups) {
   for (auto i : groups) {
@@ -100,7 +102,7 @@ void Window::ShowGroup(std::initializer_list<int> groups) {
 }
 
 void Window::HideGroup(int groupid) {
-  gruops_to_hide_or_show_.push_back(std::make_pair(groupid, false));
+  groups_to_hide_or_show_.emplace_back(groupid, false);
 }
 void Window::HideGroup(std::initializer_list<int> groups) {
   for (auto i : groups) {
@@ -108,7 +110,7 @@ void Window::HideGroup(std::initializer_list<int> groups) {
   }
 }
 void Window::HideAllGroup() {
-  for (auto group : groups_) {
+  for (const auto& group : groups_) {
     HideGroup(group.first);
   }
 }

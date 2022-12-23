@@ -2,10 +2,10 @@
 
 #include <SDL2/SDL.h>
 
-#include <iostream>
 #include <stdexcept>
+#include <utility>
 namespace ccgame {
-Font::Font(std::string path, int ptsize) {
+Font::Font(const std::string& path, int ptsize) {
   font_ = TTF_OpenFont(path.c_str(), ptsize);
   if (font_ == nullptr) {
     throw std::runtime_error(TTF_GetError());
@@ -22,7 +22,7 @@ Font::~Font() {
 TTF_Font *Font::Get() { return font_; }
 
 TextView::TextView(std::string text, Font *font, int x, int y, SDL_Color color)
-    : text_(text), font_(font), color_(color) {
+    : text_(std::move(text)), font_(font), color_(color) {
   SetPosition(x, y);
 }
 
@@ -32,7 +32,7 @@ void TextView::OnCreate(Context &context) {
 }
 
 void TextView::SetText(Context &context, std::string text) {
-  text_ = text;
+  text_ = std::move(text);
   LoadTextureFromText(context);
 }
 

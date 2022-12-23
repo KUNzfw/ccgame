@@ -36,9 +36,6 @@ Context &Context::operator=(Context &&rval) noexcept {
   rval.window_ = w;
   rval.renderer_ = r;
 
-  w = nullptr;
-  r = nullptr;
-
   return *this;
 }
 

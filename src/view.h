@@ -34,13 +34,13 @@ class View {
   void SetPosition(int x, int y);
   void SetAlign(CCGAME_ALIGN align);
 
-  int GetX() const;
-  int GetY() const;
-  int GetWidth() const;
-  int GetHeight() const;
+  [[nodiscard]] int GetX() const;
+  [[nodiscard]] int GetY() const;
+  [[nodiscard]] int GetWidth() const;
+  [[nodiscard]] int GetHeight() const;
 
   // 判断坐标是否在View内部
-  bool IsInside(Sint32 x, Sint32 y) const;
+  [[nodiscard]] bool IsInside(Sint32 x, Sint32 y) const;
 
   void Hide();
   void Show();
@@ -50,21 +50,21 @@ class View {
  protected:
   void SetSize(int width, int height);
 
-  int GetRenderX() const;
-  int GetRenderY() const;
+  [[nodiscard]] int GetRenderX() const;
+  [[nodiscard]] int GetRenderY() const;
 
  private:
   CCGAME_ALIGN align_ = CCGAME_ALIGN_TOPLEFT;
 
   bool hidden_{false};
 
-  int x_;
-  int y_;
-  int width_;
-  int height_;
+  int x_{};
+  int y_{};
+  int width_{};
+  int height_{};
 
-  int render_x_;
-  int render_y_;
+  int render_x_{};
+  int render_y_{};
 
   std::function<void(Context &)> on_create_listener_ = nullptr;
   std::function<void(Context &)> on_render_listener_ = nullptr;

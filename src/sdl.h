@@ -29,9 +29,10 @@ class SDL {
   void RegisterWindow(Window &window) const;
 
  private:
-  void InitVideo();
-  void InitImg();
-  void InitTtf();
+  bool initialized_{false};
+  void InitVideo() const;
+  void InitImg() const;
+  void InitTtf() const;
 };
 }  // namespace ccgame
 #endif

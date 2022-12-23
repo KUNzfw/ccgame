@@ -26,6 +26,8 @@ SDL::SDL(std::initializer_list<CCGAME_INIT> list) {
   // 当在x11系统上运行时，SDL会默认禁用compositor，从而导致非全屏sdl程序发生异常
   // 此处禁用这个默认行为
   SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
+
+  initialized_ = true;
 }
 
 SDL::~SDL() {
@@ -34,6 +36,10 @@ SDL::~SDL() {
 }
 
 void SDL::RegisterWindow(Window &window) const {
+  if (!initialized_) {
+    return;
+  }
+
   SDL_Window *w{SDL_CreateWindow(window.title_.c_str(), window.x_, window.y_,
                                  window.width_, window.height_,
                                  SDL_WINDOW_SHOWN)};
@@ -51,24 +57,30 @@ void SDL::RegisterWindow(Window &window) const {
   }
 
   window.context_ = Context(w, r);
-
-  w = nullptr;
-  r = nullptr;
 }
 
-void SDL::InitVideo() {
+void SDL::InitVideo() const {
+  if (initialized_) {
+    return;
+  }
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     throw std::runtime_error(SDL_GetError());
   }
 }
 
-void SDL::InitImg() {
+void SDL::InitImg() const {
+  if (initialized_) {
+    return;
+  }
   if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
     throw std::runtime_error(IMG_GetError());
   }
 }
 
-void SDL::InitTtf() {
+void SDL::InitTtf() const {
+  if (initialized_) {
+    return;
+  }
   if (TTF_Init() == -1) {
     throw std::runtime_error(TTF_GetError());
   }

@@ -12,7 +12,7 @@ class PaintView : public TextureView {
 
   void SetBackgroundColor(const SDL_Color& color);
 
-  const SDL_Color& GetBackgroundColor() const;
+  [[nodiscard]] const SDL_Color& GetBackgroundColor() const;
 
   void Clear();
   void DrawRect(const SDL_Rect& rect, bool solid, const SDL_Color& color);

@@ -3,9 +3,10 @@
 #include <SDL2/SDL_image.h>
 
 #include <stdexcept>
+#include <utility>
 namespace ccgame {
 ImageView::ImageView(std::string path, int x, int y, SDL_Color *colorkey)
-    : path_(path), colorkey_(colorkey) {
+    : path_(std::move(path)), colorkey_(colorkey) {
   SetPosition(x, y);
 }
 void ImageView::OnCreate(Context &context) {

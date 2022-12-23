@@ -10,8 +10,8 @@ TextureView::~TextureView() {
 }
 
 void TextureView::OnCreate(Context &context) {
-  if (blendmode_) {
-    SetBlendMode(blendmode_.value());
+  if (blend_mode_) {
+    SetBlendMode(blend_mode_.value());
   }
   if (alpha_) {
     SetAlpha(alpha_.value());
@@ -24,13 +24,13 @@ void TextureView::OnRender(Context &context) {
                        &rotation_center_, flip_mode_);
 }
 
-void TextureView::SetRotation(int centerx, int centery, double angle) {
-  rotation_center_.x = centerx;
-  rotation_center_.y = centery;
+void TextureView::SetRotation(int center_x, int center_y, double angle) {
+  rotation_center_.x = center_x;
+  rotation_center_.y = center_y;
   rotation_angle_ = angle;
 }
 
-void TextureView::SetFlip(SDL_RendererFlip flipmode) { flip_mode_ = flipmode; }
+void TextureView::SetFlip(SDL_RendererFlip flip_mode) { flip_mode_ = flip_mode; }
 
 void TextureView::SetScale(double scale_width, double scale_height) {
   scale_width_ = scale_width;
@@ -44,9 +44,9 @@ void TextureView::SetAlpha(Uint8 alpha) {
   if (texture_ != nullptr) SDL_SetTextureAlphaMod(texture_, alpha);
 }
 
-void TextureView::SetBlendMode(SDL_BlendMode blendmode) {
-  blendmode_ = blendmode;
-  if (texture_ != nullptr) SDL_SetTextureBlendMode(texture_, blendmode);
+void TextureView::SetBlendMode(SDL_BlendMode blend_mode) {
+  blend_mode_ = blend_mode;
+  if (texture_ != nullptr) SDL_SetTextureBlendMode(texture_, blend_mode);
 }
 
 void TextureView::SetClip(int x, int y, int width, int height) {
@@ -74,12 +74,10 @@ void TextureView::LoadFromSurface(Context &context, SDL_Surface *surface) {
 
   SDL_Texture *t{context.CreateTextureFromSurface(surface)};
   SDL_FreeSurface(surface);
-  surface = nullptr;
   if (t == nullptr) {
     throw std::runtime_error(SDL_GetError());
   }
 
   texture_ = t;
-  t = nullptr;
 }
 }  // namespace ccgame

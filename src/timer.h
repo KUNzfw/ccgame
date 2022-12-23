@@ -12,10 +12,10 @@ class Timer {
   void Pause();
   void Unpause();
 
-  Uint32 GetTicks();
+  [[nodiscard]] Uint32 GetTicks() const;
 
-  bool IsStart();
-  bool IsPause();
+  [[nodiscard]] bool IsStart() const;
+  [[nodiscard]] bool IsPause() const;
 
  private:
   Uint32 start_ticks_;

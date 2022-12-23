@@ -9,7 +9,7 @@ using namespace ccgame;
 constexpr int WINDOW_WIDTH = 640;
 constexpr int WINDOW_HEIGHT = 480;
 
-int main(int argc, char **argv) {
+int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
   try {
     SDL context{CCGAME_INIT_VIDEO, CCGAME_INIT_TTF};
 

@@ -10,15 +10,15 @@ class TextureView : public View {
   void OnCreate(Context &context) override;
   void OnRender(Context &context) override;
 
-  void SetRotation(int centerx, int centery, double angle);
-  void SetFlip(SDL_RendererFlip flipmode);
-  void SetBlendMode(SDL_BlendMode blendmode);
+  void SetRotation(int center_x, int center_y, double angle);
+  void SetFlip(SDL_RendererFlip flip_mode);
+  void SetBlendMode(SDL_BlendMode blend_mode);
   void SetClip(int x, int y, int width, int height);
   void SetScale(double scale_width, double scale_height);
   void SetAlpha(Uint8 alpha);
 
-  int GetTextureWidth() const;
-  int GetTextureHeight() const;
+  [[nodiscard]] int GetTextureWidth() const;
+  [[nodiscard]] int GetTextureHeight() const;
 
   void LoadFromSurface(Context &context, SDL_Surface *surface);
 
@@ -33,7 +33,7 @@ class TextureView : public View {
   double rotation_angle_{0.0};
   SDL_RendererFlip flip_mode_{SDL_FLIP_NONE};
 
-  std::optional<SDL_BlendMode> blendmode_{};
+  std::optional<SDL_BlendMode> blend_mode_{};
   std::optional<Uint8> alpha_{};
 
   SDL_Rect clip_{0, 0, 0, 0};

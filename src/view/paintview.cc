@@ -54,7 +54,8 @@ void PaintView::OnRender(Context& context) {
         }
         case GEO_AACIRCLE: {
           int x = cmd[1], y = cmd[2], radius = cmd[3];
-          int i = 0, j = radius, last_fade_amount = 0, fade_amount = 0;
+          int i = 0, j = radius;
+          double last_fade_amount = 0.0;
 
           int MAX_OPAQUE = cmd[7];
 
@@ -105,7 +106,8 @@ void PaintView::OnRender(Context& context) {
         }
         case GEO_AACIRCLE_FILL: {
           int x = cmd[1], y = cmd[2], radius = cmd[3];
-          int i = 0, j = radius, last_fade_amount = 0, fade_amount = 0;
+          int i = 0, j = radius;
+          double last_fade_amount = 0.0;
 
           int MAX_OPAQUE = cmd[7];
 

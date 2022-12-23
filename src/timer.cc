@@ -34,7 +34,7 @@ void Timer::Unpause() {
   }
 }
 
-Uint32 Timer::GetTicks() {
+Uint32 Timer::GetTicks() const {
   if (start_) {
     if (pause_) {
       return pause_ticks_ - start_ticks_;
@@ -45,6 +45,6 @@ Uint32 Timer::GetTicks() {
     return 0;
   }
 }
-bool Timer::IsStart() { return start_; }
-bool Timer::IsPause() { return pause_; }
+bool Timer::IsStart() const { return start_; }
+bool Timer::IsPause() const { return pause_; }
 }  // namespace ccgame

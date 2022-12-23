@@ -5,7 +5,7 @@ namespace ccgame {
 // 封装SDL的函数以避免SDL_Window等指针的暴露
 class Context {
  public:
-  Context();
+  Context() = default;
   // 禁止复制
   Context(const Context &rval) = delete;
   Context(SDL_Window *window, SDL_Renderer *renderer);
@@ -26,8 +26,8 @@ class Context {
 
   void RenderClear();
   void RenderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
-                    const SDL_Rect *dstrect, const double angle,
-                    const SDL_Point *center, const SDL_RendererFlip flip);
+                    const SDL_Rect *dstrect, double angle,
+                    const SDL_Point *center, SDL_RendererFlip flip);
 
   void RenderPresent();
 

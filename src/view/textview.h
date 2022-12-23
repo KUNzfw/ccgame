@@ -10,7 +10,7 @@ namespace ccgame {
 class Font {
  public:
   Font() = delete;
-  Font(std::string path, int ptsize);
+  Font(const std::string& path, int ptsize);
   ~Font();
   TTF_Font *Get();
 

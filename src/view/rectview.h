@@ -11,7 +11,7 @@ class RectView : public PaintView {
   void SetColor(const SDL_Color& color);
 
  private:
-  SDL_Rect rect_;
+  SDL_Rect rect_{};
   bool solid_{false};
   SDL_Color color_;
 };

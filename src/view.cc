@@ -1,7 +1,7 @@
 #include "view.h"
 namespace ccgame {
-View::View() : width_(0), height_(0), x_(0), y_(0) {}
-View::~View() {}
+View::View() = default;
+View::~View() = default;
 
 void View::OnCreate(Context &context) {}
 void View::OnRender(Context &context) {}
