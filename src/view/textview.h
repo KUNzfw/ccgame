@@ -23,7 +23,7 @@ class TextView : public TextureView {
   TextView() = delete;
   TextView(std::string text, Font *font, int x, int y,
            SDL_Color color = {0, 0, 0});
-  void OnCreate(Context &context) override;
+  void OnShow(Context &context) override;
 
   void SetText(Context &context, std::string text);
 

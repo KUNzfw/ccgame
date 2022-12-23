@@ -8,7 +8,7 @@ ImageView::ImageView(std::string path, int x, int y, SDL_Color *colorkey)
     : path_(path), colorkey_(colorkey) {
   SetPosition(x, y);
 }
-void ImageView::OnCreate(Context &context) {
+void ImageView::OnShow(Context &context) {
   SDL_Surface *loadedImg{IMG_Load(path_.c_str())};
   if (loadedImg == nullptr) {
     throw std::runtime_error(IMG_GetError());
@@ -22,7 +22,7 @@ void ImageView::OnCreate(Context &context) {
 
   LoadFromSurface(context, loadedImg);
 
-  TextureView::OnCreate(context);
+  TextureView::OnShow(context);
 }
 
 }  // namespace ccgame

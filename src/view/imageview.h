@@ -8,7 +8,7 @@ class ImageView : public TextureView {
  public:
   ImageView() = delete;
   ImageView(std::string path, int x, int y, SDL_Color *colorkey = nullptr);
-  void OnCreate(Context &context) override;
+  void OnShow(Context &context) override;
 
  private:
   std::string path_;
