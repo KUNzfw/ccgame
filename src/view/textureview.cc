@@ -9,7 +9,7 @@ TextureView::~TextureView() {
   }
 }
 
-void TextureView::OnCreate(Context &context) {
+void TextureView::OnShow(Context &context) {
   if (blend_mode_) {
     SetBlendMode(blend_mode_.value());
   }

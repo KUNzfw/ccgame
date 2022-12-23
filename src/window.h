@@ -22,7 +22,7 @@ class Window {
   void RegisterView(View *view, int groupid = -1);
   // 启动窗口并开始事件循环
   // !这个方法会进入死循环，在窗口退出前无法继续执行后续程序
-  // 事件顺序: Create -> Events -> Render -> Events -> Render -> ... -> Quit
+  // 事件顺序: Show -> Events -> Render -> (Show,Hide) -> Events -> Render -> ... -> Hide
   // Events 包括Keydown等
   void Start();
 

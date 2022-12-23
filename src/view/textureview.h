@@ -7,7 +7,7 @@ namespace ccgame {
 class TextureView : public View {
  public:
   ~TextureView();
-  void OnCreate(Context &context) override;
+  void OnShow(Context &context) override;
   void OnRender(Context &context) override;
 
   void SetRotation(int center_x, int center_y, double angle);

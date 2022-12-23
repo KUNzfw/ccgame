@@ -5,14 +5,14 @@ PaintView::PaintView(int x, int y, int width, int height) {
   SetClip(0, 0, width, height);
 }
 
-void PaintView::OnCreate(Context& context) {
+void PaintView::OnShow(Context& context) {
   texture_ =
       context.CreateTexture(SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
                             GetWidth(), GetHeight());
   texture_width_ = GetWidth();
   texture_height_ = GetHeight();
 
-  TextureView::OnCreate(context);
+  TextureView::OnShow(context);
 }
 
 void PaintView::OnRender(Context& context) {

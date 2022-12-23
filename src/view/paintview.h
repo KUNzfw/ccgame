@@ -7,7 +7,7 @@ class PaintView : public TextureView {
   PaintView(int x, int y, int width, int height);
   PaintView() = delete;
 
-  void OnCreate(Context& context) override;
+  void OnShow(Context& context) override;
   void OnRender(Context& context) override;
 
   void SetBackgroundColor(const SDL_Color& color);

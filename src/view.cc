@@ -3,16 +3,16 @@ namespace ccgame {
 View::View() = default;
 View::~View() = default;
 
-void View::OnCreate(Context &context) {}
+void View::OnShow(Context &context) {}
 void View::OnRender(Context &context) {}
 void View::OnKeyDown(Context &context, SDL_Keycode keycode) {}
 void View::OnMouseButtonDown(Context &context, Sint32 x, Sint32 y,
                              Uint8 button) {}
 void View::OnMouseMotion(Context &context, Sint32 x, Sint32 y) {}
-void View::OnQuit(Context &context) {}
+void View::OnHide(Context &context) {}
 
-void View::SetOnCreateListener(std::function<void(Context &)> listener) {
-  on_create_listener_ = std::move(listener);
+void View::SetOnShowListener(std::function<void(Context &)> listener) {
+  on_show_listener_ = std::move(listener);
 }
 void View::SetOnRenderListener(std::function<void(Context &)> listener) {
   on_render_listener_ = std::move(listener);
@@ -29,8 +29,8 @@ void View::SetOnMouseMotion(
     std::function<void(Context &, Sint32, Sint32)> listener) {
   on_mousemotion_listener_ = std::move(listener);
 }
-void View::SetOnQuitListener(std::function<void(Context &)> listener) {
-  on_quit_listener_ = std::move(listener);
+void View::SetOnHideListener(std::function<void(Context &)> listener) {
+  on_hide_listener_ = std::move(listener);
 }
 
 void View::SetPosition(int x, int y) {
@@ -64,6 +64,8 @@ bool View::IsInside(Sint32 x, Sint32 y) const {
 
 void View::Hide() { hidden_ = true; }
 void View::Show() { hidden_ = false; }
+
+bool View::isHidden() { return hidden_; }
 
 void View::UpdateRenderInfo() {
   switch (align_) {

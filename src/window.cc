@@ -22,9 +22,9 @@ void Window::RegisterView(View *view, int groupid) {
 
 void Window::Start() {
   for (auto v : views_) {
-    if (v->hidden_) continue;
-    v->OnCreate(context_);
-    if (v->on_create_listener_ != nullptr) v->on_create_listener_(context_);
+    if (v->isHidden()) continue;
+    v->OnShow(context_);
+    if (v->on_show_listener_ != nullptr) v->on_show_listener_(context_);
   }
 
   SDL_Event e{};
@@ -32,9 +32,17 @@ void Window::Start() {
     for (auto g : groups_to_hide_or_show_) {
       for (auto v : groups_[g.first]) {
         if (g.second) {
-          v->Show();
+          if (v->isHidden()) {
+            v->Show();
+            v->OnShow(context_);
+            if (v->on_show_listener_ != nullptr) v->on_show_listener_(context_);
+          }
         } else {
-          v->Hide();
+          if (!v->hidden_) {
+            v->Hide();
+            v->OnHide(context_);
+            if (v->on_show_listener_ != nullptr) v->on_hide_listener_(context_);
+          }
         }
       }
     }
@@ -86,9 +94,9 @@ void Window::Start() {
     context_.RenderPresent();
   }
   for (auto v : views_) {
-    if (v->hidden_) continue;
-    v->OnQuit(context_);
-    if (v->on_quit_listener_ != nullptr) v->on_quit_listener_(context_);
+    if (v->isHidden()) continue;
+    v->OnHide(context_);
+    if (v->on_hide_listener_ != nullptr) v->on_hide_listener_(context_);
   }
 }
 

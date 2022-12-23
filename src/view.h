@@ -13,15 +13,15 @@ class View {
   View();
   ~View();
 
-  virtual void OnCreate(Context &context);
+  virtual void OnShow(Context &context);
   virtual void OnRender(Context &context);
   virtual void OnKeyDown(Context &context, SDL_Keycode keycode);
   virtual void OnMouseButtonDown(Context &context, Sint32 x, Sint32 y,
                                  Uint8 button);
   virtual void OnMouseMotion(Context &context, Sint32 x, Sint32 y);
-  virtual void OnQuit(Context &context);
+  virtual void OnHide(Context &context);
 
-  void SetOnCreateListener(std::function<void(Context &)> listener);
+  void SetOnShowListener(std::function<void(Context &)> listener);
   void SetOnRenderListener(std::function<void(Context &)> listener);
   void SetOnKeydownListener(
       std::function<void(Context &, SDL_Keycode)> listener);
@@ -29,7 +29,7 @@ class View {
       std::function<void(Context &context, Sint32 x, Sint32 y, Uint8 button)> listener);
   void SetOnMouseMotion(
       std::function<void(Context &, Sint32, Sint32)> listener);
-  void SetOnQuitListener(std::function<void(Context &)> listener);
+  void SetOnHideListener(std::function<void(Context &)> listener);
 
   void SetPosition(int x, int y);
   void SetAlign(CCGAME_ALIGN align);
@@ -44,6 +44,7 @@ class View {
 
   void Hide();
   void Show();
+  bool isHidden();
 
   friend void Window::Start();
 
@@ -66,14 +67,14 @@ class View {
   int render_x_{};
   int render_y_{};
 
-  std::function<void(Context &)> on_create_listener_ = nullptr;
+  std::function<void(Context &)> on_show_listener_ = nullptr;
   std::function<void(Context &)> on_render_listener_ = nullptr;
   std::function<void(Context &, SDL_Keycode)> on_keydown_listener_ = nullptr;
   std::function<void(Context &, Sint32, Sint32, Uint8)>
       on_mousebuttondown_listener_ = nullptr;
   std::function<void(Context &, Sint32, Sint32)> on_mousemotion_listener_ =
       nullptr;
-  std::function<void(Context &)> on_quit_listener_ = nullptr;
+  std::function<void(Context &)> on_hide_listener_ = nullptr;
 
   void UpdateRenderInfo();
 };

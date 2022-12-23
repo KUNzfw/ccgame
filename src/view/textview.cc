@@ -26,9 +26,9 @@ TextView::TextView(std::string text, Font *font, int x, int y, SDL_Color color)
   SetPosition(x, y);
 }
 
-void TextView::OnCreate(Context &context) {
+void TextView::OnShow(Context &context) {
   LoadTextureFromText(context);
-  TextureView::OnCreate(context);
+  TextureView::OnShow(context);
 }
 
 void TextView::SetText(Context &context, std::string text) {
