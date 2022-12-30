@@ -51,11 +51,6 @@ bool View::IsInside(Sint32 x, Sint32 y) const {
          y < render_y_ + height_;
 }
 
-void View::Hide() { hidden_ = true; }
-void View::Show() { hidden_ = false; }
-
-bool View::IsHidden() const { return hidden_; }
-
 void View::UpdateRenderInfo() {
   switch (align_) {
     case CCGAME_ALIGN_TOPLEFT:

@@ -7,6 +7,7 @@ namespace ccgame {
 class ImageView : public TextureView {
  public:
   ImageView() = delete;
+  // Construct the ImageView with the given parameters.
   ImageView(std::string path, int x, int y, SDL_Color *colorkey = nullptr);
   void OnShow(Context &context) override;
 

@@ -11,30 +11,43 @@
 #include "sdl.h"
 namespace ccgame {
 class View;
-// 管理窗口相关信息以及View
+// Manage the window and its views.
 class Window {
  public:
   Window() = delete;
+  // Construct the window with the given parameters
   Window(std::string title, int width, int height,
          int x = SDL_WINDOWPOS_UNDEFINED, int y = SDL_WINDOWPOS_UNDEFINED);
 
-  // 注册View使其能够渲染并接受事件
+  // Register the view so that it can get events and deal with them.
   void RegisterView(View *view, int groupid = -1);
-  // 启动窗口并开始事件循环
-  // !这个方法会进入死循环，在窗口退出前无法继续执行后续程序
-  // 事件顺序: Show -> Events -> Render -> (Show,Hide) -> Events -> Render -> ... -> Hide
-  // Events 包括Keydown等
+  // Start the window and begin event loop
+  // Attention: the function will block the main thread!
+  // Event order: Show -> Events -> Render -> (Show,Hide) -> Events -> Render ->
+  // ... -> Hide
+  // Events include KeyDown, MouseDown etc.
   void Start();
 
+  // Show the view.
+  void ShowView(View *view);
+  // Hide the view.
+  void HideView(View *view);
+
+  // Show all the view in a group.
   void ShowGroup(int groupid);
+  // Show all the view in groups.
   void ShowGroup(std::initializer_list<int> groups);
+  // Hide all the view in a group.
   void HideGroup(int groupid);
+  // Hide all the view in groups.
   void HideGroup(std::initializer_list<int> groups);
+  // Hide all the view in all group.
   void HideAllGroup();
 
+  // Quit the SDL. Must be called when the game end.
   void Quit();
 
-  // 传入rgba值以设置窗口的背景颜色
+  // Set the background color of the window.
   void SetBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
   friend void SDL::RegisterWindow(Window &window) const;
@@ -47,14 +60,19 @@ class Window {
   int height_;
   int x_;
   int y_;
+  int frame_rate_{60};
   SDL_Color bgcolor_{0xFF, 0xFF, 0xFF, 0xFF};
 
-  std::vector<View *> views_;
+  // the second value determine whether the view is shown or not
+  std::vector<std::pair<View *, bool>> views_;
   std::map<int, std::vector<View *>> groups_;
 
   // true to show, false to hide
-  std::vector<std::pair<int, bool>> groups_to_hide_or_show_;
+  std::map<std::vector<std::pair<View *, bool>>::iterator, bool>
+      views_to_hide_or_show_;
 
+  bool registered_{false};
+  bool started_{false};
   bool quit_{false};
 };
 }  // namespace ccgame

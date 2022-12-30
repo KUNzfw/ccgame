@@ -11,16 +11,25 @@ class TextureView : public View {
   void OnRender(Context &context) override;
   void OnHide(Context &context) override;
 
+  // Set the rotation angle of the texture content.
   void SetRotation(int center_x, int center_y, double angle);
+  // Set the flip mode of the texture content.
   void SetFlip(SDL_RendererFlip flip_mode);
+  // Set the blend mode of the texture content.
   void SetBlendMode(SDL_BlendMode blend_mode);
+  // Set the clip rectangle of the texture.
   void SetClip(int x, int y, int width, int height);
+  // Set the scale size of the texture.
   void SetScale(double scale_width, double scale_height);
+  // Set the transparent value of the texture.
   void SetAlpha(Uint8 alpha);
 
+  // Get the width of the texture.
   [[nodiscard]] int GetTextureWidth() const;
+  // Get the height of the texture.
   [[nodiscard]] int GetTextureHeight() const;
 
+  // Load texture from given surface.
   void LoadFromSurface(Context &context, SDL_Surface *surface);
 
  protected:

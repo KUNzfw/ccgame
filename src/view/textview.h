@@ -10,7 +10,7 @@ namespace ccgame {
 class Font {
  public:
   Font() = delete;
-  Font(const std::string& path, int ptsize);
+  Font(const std::string &path, int ptsize);
   ~Font();
   TTF_Font *Get();
 
@@ -21,10 +21,13 @@ class Font {
 class TextView : public TextureView {
  public:
   TextView() = delete;
+  // Construct the TextView with the given parameters.
+  // Attention: the text should not be empty.
   TextView(std::string text, Font *font, int x, int y,
            SDL_Color color = {0, 0, 0});
   void OnShow(Context &context) override;
 
+  // Set the text of the view
   void SetText(Context &context, std::string text);
 
  private:

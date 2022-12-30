@@ -2,11 +2,11 @@
 #define CCGAME_CONTEXT_h_
 #include <SDL2/SDL.h>
 namespace ccgame {
-// 封装SDL的函数以避免SDL_Window等指针的暴露
+// Wrap the function of SDL2 to avoid use pointer directly.
 class Context {
  public:
   Context() = default;
-  // 禁止复制
+  // disable copy constructor
   Context(const Context &rval) = delete;
   Context(SDL_Window *window, SDL_Renderer *renderer);
   Context(Context &&rval) noexcept;

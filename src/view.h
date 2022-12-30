@@ -37,12 +37,8 @@ class View {
   [[nodiscard]] int GetWidth() const;
   [[nodiscard]] int GetHeight() const;
 
-  // 判断坐标是否在View内部
+  // Determine if the coordinate is within the view.
   [[nodiscard]] bool IsInside(Sint32 x, Sint32 y) const;
-
-  void Hide();
-  void Show();
-  [[nodiscard]] bool IsHidden() const;
 
   friend void Window::Start();
 
@@ -54,8 +50,6 @@ class View {
 
  private:
   CCGAME_ALIGN align_ = CCGAME_ALIGN_TOPLEFT;
-
-  bool hidden_{false};
 
   int x_{};
   int y_{};
