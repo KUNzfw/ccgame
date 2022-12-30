@@ -103,6 +103,7 @@ void PaintView::OnRender(Context& context) {
             }
             i += 1;
           }
+          break;
         }
         case GEO_AACIRCLE_FILL: {
           int x = cmd[1], y = cmd[2], radius = cmd[3];
@@ -164,6 +165,7 @@ void PaintView::OnRender(Context& context) {
             }
             i += 1;
           }
+          break;
         }
       }
     }
