@@ -68,7 +68,7 @@ class Window {
   std::map<int, std::vector<View *>> groups_;
 
   // true to show, false to hide
-  std::map<std::vector<std::pair<View *, bool>>::iterator, bool>
+  std::vector<std::pair<std::vector<std::pair<View *, bool>>::iterator, bool>>
       views_to_hide_or_show_;
 
   bool registered_{false};

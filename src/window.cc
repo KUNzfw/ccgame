@@ -137,7 +137,14 @@ void Window::ShowView(View* view) {
   }
   // different before and after start
   if (started_) {
-    views_to_hide_or_show_[view_iterator] = true;
+    auto p = std::find_if(views_to_hide_or_show_.begin(),
+                          views_to_hide_or_show_.end(),
+                          [&](auto val) { return val.first == view_iterator; });
+    if (p == views_to_hide_or_show_.end()) {
+      views_to_hide_or_show_.emplace_back(view_iterator, true);
+    } else {
+      p->second = true;
+    }
   } else {
     view_iterator->second = true;
   }
@@ -152,7 +159,14 @@ void Window::HideView(View* view) {
   }
   // different before and after start
   if (started_) {
-    views_to_hide_or_show_[view_iterator] = false;
+    auto p = std::find_if(views_to_hide_or_show_.begin(),
+                          views_to_hide_or_show_.end(),
+                          [&](auto val) { return val.first == view_iterator; });
+    if (p == views_to_hide_or_show_.end()) {
+      views_to_hide_or_show_.emplace_back(view_iterator, false);
+    } else {
+      p->second = false;
+    }
   } else {
     view_iterator->second = false;
   }
